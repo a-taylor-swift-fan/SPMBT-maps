@@ -36,3 +36,32 @@ ISSUES AND BUGS:
 * Center of map may differ from specified location by some hexes
 * -w shorthand trouble
 * All the height data in hex are chosen by closest pixel which may cause unintended phenomena, i.e. artifacts in the map. Fix them by hand.
+
+
+ADDENDUM AS OF 12-NOV 2025:
+For new users using the latest version of Linux.
+These procedures were written for and tested using Ubuntu 24.04.3 LTS.
+
+These must be done after installing the dependencies mentioned previously.
+  sudo apt-get update
+  sudo apt-get install build-essential
+  sudo apt-get install libswitch-perl 
+
+Also, libgetopt-mixed-perl must be installed manually. This package is no longer included in latest versions of Linux distributions.
+
+  Download here and install in terminal via sudo'd dpkg:
+  https://mirror.cc.vt.edu/pub2/ubuntu/pool/universe/libg/libgetopt-mixed-perl/libgetopt-mixed-perl_1.008-10.2_all.deb
+
+  sudo dpkg -i libgetopt-mixed-perl_1.008-10.2_all.deb
+
+NOTE:
+Possible off-by-one not-a-bug bug with the script where the longitude is off to the left by one. Incrementing the longitude by 1 fixes the issue.
+
+For example, to recreate the downtown Louisville, KY USA area--Google says its coordinates are N38.26152, W85.74163.
+
+On the Linux terminal, this must be entered as:
+
+	$ sudo perl strm3-map.pl --la N38.26152 --lo W86.74163 --water=1 --min 5
+
+NOTE 2:
+When downloading heightmap files, ensure that they are also located in the same directory where the Venhola map tool resides. Otherwise the script throws an error message stating it cannot find the .hgt file.
